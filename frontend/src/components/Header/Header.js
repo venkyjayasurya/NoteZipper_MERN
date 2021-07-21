@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Navbar, Nav, NavDropdown, FormControl, Button, Form } from 'react-bootstrap'
+import { Container, Navbar, Nav, NavDropdown, FormControl, Form } from 'react-bootstrap'
 
 const Header = () => {
     return (
@@ -7,15 +7,15 @@ const Header = () => {
             <header>
                 <Navbar bg="primary" expand="lg" variant="dark">
                     <Container>
-                        <Navbar.Brand href="#">React-Bootstrap</Navbar.Brand>
+                        <Navbar.Brand href="/">Note Zipper</Navbar.Brand>
                         <Navbar.Toggle aria-controls="navbarScroll" />
                         <Navbar.Collapse id="navbarScroll">
                             <Nav
-                                className="mr-auto my-2 my-lg-0"
+                                className="m-auto my-2 my-lg-0"
                                 style={{ maxHeight: '100px' }}
                                 navbarScroll
                             >
-                                <Nav className='mr-auto'>
+                                <Nav className='m-auto'>
                                     <Form className="d-flex">
                                         <FormControl
                                             type="search"
@@ -23,20 +23,17 @@ const Header = () => {
                                             className="mr-2"
                                             aria-label="Search"
                                         />
-                                        <Button variant="outline-success">Search</Button>
+                                        {/* <Button variant="outline-success">Search</Button> */}
                                     </Form>
                                 </Nav>
-                                <Nav.Link href="#action1">Home</Nav.Link>
-                                <Nav.Link href="#action2">Link</Nav.Link>
-                                <NavDropdown title="Link" id="navbarScrollingDropdown">
-                                    <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-                                    <NavDropdown.Item href="#action4">Another action</NavDropdown.Item>
-                                    <NavDropdown.Divider />
-                                    <NavDropdown.Item href="#action5">Something else here</NavDropdown.Item>
-                                </NavDropdown>
-                                <Nav.Link href="#" disabled>
-                                    Link
-                                </Nav.Link>
+                                <Nav>
+                                    <Nav.Link href="#notes">My Notes</Nav.Link>
+                                    <NavDropdown title="Venkatesh" id="navbarScrollingDropdown">
+                                        <NavDropdown.Item href="#action4">My Profile</NavDropdown.Item>
+                                        <NavDropdown.Divider />
+                                        <NavDropdown.Item href="#action5">Logout</NavDropdown.Item>
+                                    </NavDropdown>
+                                </Nav>
                             </Nav>
                         </Navbar.Collapse>
                     </Container>
