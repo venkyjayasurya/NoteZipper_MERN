@@ -21,6 +21,7 @@ const MyNotes = () => {
   console.log(notes);
   useEffect(() => {
     fetchNotes();
+    console.log("UseEffect");
   }, []);
 
   return (
