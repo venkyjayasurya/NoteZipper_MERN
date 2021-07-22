@@ -12,18 +12,10 @@ const landingPage = () => {
             <p className="subtitle">One safe place for all your notes</p>
             <div className="buttonContainer">
               <a href="/login">
-                <Button size="lg" className="landingButton">
-                  Login
-                </Button>
+                <Button size="lg" className="landingButton">Login</Button>
               </a>
               <a href="/register">
-                <Button
-                  size="lg"
-                  className="landingButton"
-                  variant="outline-primary"
-                >
-                  SignUp
-                </Button>
+                <Button size="lg" className="landingButton" variant="outline-primary">SignUp</Button>
               </a>
             </div>
           </div>
