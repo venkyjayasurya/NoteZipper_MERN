@@ -5,11 +5,13 @@ const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const userRoutes = require("./routes/userRoutes");
 const { notFound, errorHandler } = require("./middlewares/errorMiddleware")
+const cors = require("cors")
+
 
 // Initialize express app
 const app = express();
 app.use(express.json());
-
+app.use(cors()) //Applying cors policy
 // Configure dotenv to use in the file
 dotenv.config();
 
