@@ -23,16 +23,6 @@ app.get("/", (req, res) => {
   res.send("API is running");
 });
 
-// app.get("/api/notes", (req, res) => {
-//   res.json(notes);
-// });
-
-// app.get("/api/notes/:id", (req, res) => {
-//   // returns only a single note which is passed in url parameters
-//   const note = notes.find((n) => n._id === req.params.id);
-//   res.send(note);
-// });
-
 // Route
 app.use("/api/users", userRoutes);
 app.use("/api/notes", noteRoutes)
