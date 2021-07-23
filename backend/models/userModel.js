@@ -33,6 +33,7 @@ const userSchema = mongoose.Schema({
     timestamps: true,
 });
 
+// Add hashing for the password security before saving it to database
 userSchema.pre('save', async function(next){
     if(!this.isModified('password')){
         next()
@@ -42,6 +43,7 @@ userSchema.pre('save', async function(next){
     this.password = await bcrypt.hash(this.password, salt)
 })
 
+// Check whether the password entered in frontend is same as the hashed password
 userSchema.methods.matchPassword = async function(enteredPassword){
   return await bcrypt.compare(enteredPassword, this.password)
 }
