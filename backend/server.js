@@ -13,6 +13,7 @@ const cors = require("cors")
 const app = express();
 app.use(express.json());
 app.use(cors()) //Applying cors policy
+
 // Configure dotenv to use in the file
 dotenv.config();
 
