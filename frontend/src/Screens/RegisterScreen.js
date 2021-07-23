@@ -1,10 +1,11 @@
-import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import ErrorMessage from "../components/ErrorMessage";
 import Loading from "../components/Loading";
 import MainScreen from "../components/MainScreen";
+import { useDispatch, useSelector } from "react-redux";
+import { register } from "../actions/userActions";
 
 const RegisterScreen = () => {
   const [email, setEmail] = useState("");
@@ -16,8 +17,18 @@ const RegisterScreen = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState(null);
   const [picMessage, setPicMessage] = useState(null);
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
+
+  const dispatch = useDispatch();
+  const userRegister = useSelector((state) => state.userRegister);
+  const { loading, error, userInfo } = userRegister;
+
+  const history = useHistory();
+
+  useEffect(() => {
+    if (userInfo) {
+      history.push("/mynotes");
+    }
+  }, [history, userInfo]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -25,61 +36,48 @@ const RegisterScreen = () => {
     if (password !== confirmPassword) {
       setMessage("Passwords do not match");
     } else {
-      setMessage(null);
-      try {
-        const config = {
-          headers: {
-            "Content-type": "application/json",
-          },
-        };
-        setLoading(true);
-        const { data } = await axios.post(
-          "http://localhost:5000/api/users",
-          { name, pic, email, password },
-          config
-        );
-        setLoading(false);
-        localStorage.setItem("userInfo", JSON.stringify(data))
-      } catch (error) {
-        setError(error.response.data.message)
-        setLoading(false);
-      }
+      dispatch(register(name, email, password, pic));
     }
   };
 
-const postDetails = (pics) =>{
-    if(!pics){
-        return setPicMessage("Please upload an image!")
+  const postDetails = (pics) => {
+    if (!pics) {
+      return setPicMessage("Please upload an image!");
     }
-    setPicMessage(null)
+    setPicMessage(null);
 
-    if(pics.type === 'image/jpeg' || pics.type === 'image/png' || pics.type === 'image/jpg'){
-        const data = new FormData()
-        data.append('file', pics)
-        data.append('upload_preset', 'notezipper')
-        data.append('cloud_name', 'dup5iwodq')
-        fetch("https://api.cloudinary.com/v1_1/dup5iwodq/image/upload", {
-            method: "POST",
-            body: data,
-        }).then((res)=> res.json())
-        .then((data)=>{
-            console.log(data)
-            setPic(data.url.toString())
-        }).catch((err) => {
-            console.log(err)
+    if (
+      pics.type === "image/jpeg" ||
+      pics.type === "image/png" ||
+      pics.type === "image/jpg"
+    ) {
+      const data = new FormData();
+      data.append("file", pics);
+      data.append("upload_preset", "notezipper");
+      data.append("cloud_name", "dup5iwodq");
+      fetch("https://api.cloudinary.com/v1_1/dup5iwodq/image/upload", {
+        method: "POST",
+        body: data,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          setPic(data.url.toString());
         })
-    }else{
-        return setPicMessage("Please Select proper file format image")
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      return setPicMessage("Please Select proper file format image");
     }
-}
-
+  };
 
   return (
     <MainScreen title="REGISTER">
       <div className="loginContainer">
         {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
         {message && <ErrorMessage variant="danger">{message}</ErrorMessage>}
-        {loading && <Loading/>}
+        {loading && <Loading />}
         <Form onSubmit={submitHandler}>
           <Form.Group className="mb-3" controlId="name">
             <Form.Label>Name</Form.Label>
@@ -121,9 +119,9 @@ const postDetails = (pics) =>{
             />
           </Form.Group>
 
-            {picMessage && (
-                <ErrorMessage variant="danger">{picMessage}</ErrorMessage>
-            )}
+          {picMessage && (
+            <ErrorMessage variant="danger">{picMessage}</ErrorMessage>
+          )}
 
           <Form.Group controlId="pic">
             <Form.Label>Profile Picture</Form.Label>

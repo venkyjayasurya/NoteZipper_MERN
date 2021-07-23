@@ -7,9 +7,22 @@ import {
   FormControl,
   Form,
 } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
+import { logout } from "../../actions/userActions";
 
 const Header = () => {
+  const history = useHistory()
+  const dispatch = useDispatch()
+  const userLogin = useSelector(state => state.userLogin)
+  const {userInfo} = userLogin
+
+  const logoutHandler = ()=> {
+    dispatch(logout())
+    history.push("/")
+  }
+
+
   return (
     <div>
       <header>
@@ -45,7 +58,7 @@ const Header = () => {
                       My Profile
                     </NavDropdown.Item>
                     <NavDropdown.Divider />
-                    <NavDropdown.Item href="#action5">Logout</NavDropdown.Item>
+                    <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
                   </NavDropdown>
                 </Nav>
               </Nav>
