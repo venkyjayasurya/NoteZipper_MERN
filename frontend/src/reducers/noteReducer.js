@@ -28,7 +28,8 @@ export const noteCreateReducer = (state = {}, action) => {
       return { loading: false, success: true };
     case NOTES_CREATE_FAIL:
       return { loading: false, error: action.payload };
-      default:
-        return state
+
+    default:
+      return state;
   }
 };
