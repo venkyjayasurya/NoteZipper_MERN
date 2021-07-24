@@ -1,5 +1,5 @@
 const express = require("express");
-const { getNotes, createNote, getNoteById, updateNote } = require("../controllers/notesController");
+const { getNotes, createNote, getNoteById, updateNote, deleteNote } = require("../controllers/notesController");
 const { protect } = require("../middlewares/authMiddleware");
 const router = express.Router();
 
