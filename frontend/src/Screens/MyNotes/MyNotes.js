@@ -27,7 +27,7 @@ const MyNotes = ({history}) => {
     dispatch(listNotes());
 
     if(!userInfo){
-      history.push("/")
+      history.pushState("/")
     }
 
   }, [dispatch, userInfo]);
