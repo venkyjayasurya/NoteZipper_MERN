@@ -36,8 +36,8 @@ function RegisterScreen({ history }) {
       const data = new FormData();
       data.append("file", pics);
       data.append("upload_preset", "notezipper");
-      data.append("cloud_name", "piyushproj");
-      fetch("https://api.cloudinary.com/v1_1/piyushproj/image/upload", {
+      data.append("cloud_name", "dup5iwodq");
+      fetch("https://api.cloudinary.com/v1_1/dup5iwodq/image/upload", {
         method: "post",
         body: data,
       })
