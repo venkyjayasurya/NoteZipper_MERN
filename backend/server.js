@@ -1,39 +1,50 @@
-const express = require("express");
-// Include notes static database
-const notes = require("./data/notes");
-const dotenv = require("dotenv");
-const connectDB = require("./config/db");
-const userRoutes = require("./routes/userRoutes");
-const noteRoutes = require("./routes/noteRoutes");
-const { notFound, errorHandler } = require("./middlewares/errorMiddleware")
-const cors = require("cors")
+import express from "express";
+import dotenv from "dotenv";
+import connectDB from "./config/db.js";
+import colors from "colors";
+import path from "path";
 
+import noteRoutes from "./routes/noteRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
+import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
 
-// Initialize express app
-const app = express();
-app.use(express.json());
-app.use(cors()) //Applying cors policy
-
-// Configure dotenv to use in the file
 dotenv.config();
 
-// Call the connectDB function to connect mongodb
 connectDB();
 
-app.get("/", (req, res) => {
-  res.send("API is running");
-});
+const app = express(); // main thing
 
-// Route
+app.use(express.json()); // to accept json data
+
+app.use("/api/notes", noteRoutes);
 app.use("/api/users", userRoutes);
-app.use("/api/notes", noteRoutes)
 
+// --------------------------deployment------------------------------
+const __dirname = path.resolve();
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "/frontend/build")));
+
+  app.get("*", (req, res) =>
+    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"))
+  );
+} else {
+  app.get("/", (req, res) => {
+    res.send("API is running..");
+  });
+}
+// --------------------------deployment------------------------------
+
+// Error Handling middlewares
 app.use(notFound);
 app.use(errorHandler);
 
-// Use process.env to access the .env variables, if it is not accessed we are setting the PORT to 5000
 const PORT = process.env.PORT || 5000;
 
-// Express app get or send the requests and responses to the port for which we use listen method to set PORT
-app.listen(PORT, console.log(`Server Started on ${PORT}`));
+app.listen(
+  PORT,
+  console.log(
+    `Server running in ${process.env.NODE_ENV} mode on port ${PORT}..`.yellow
+      .bold
+  )
+);

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import MainScreen from "../components/MainScreen";
+import MainScreen from "../../components/MainScreen";
 import { Button, Card, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { createNoteAction } from "../actions/notesActions";
-import Loading from "../components/Loading";
-import ErrorMessage from "../components/ErrorMessage";
+import { createNoteAction } from "../../actions/notesActions";
+import Loading from "../../components/Loading";
+import ErrorMessage from "../../components/ErrorMessage";
 import ReactMarkdown from "react-markdown";
 
 function CreateNote({ history }) {
@@ -27,8 +27,8 @@ function CreateNote({ history }) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (!title || !content || !category) return;
     dispatch(createNoteAction(title, content, category));
+    if (!title || !content || !category) return;
 
     resetHandler();
     history.push("/mynotes");
@@ -46,7 +46,7 @@ function CreateNote({ history }) {
             <Form.Group controlId="title">
               <Form.Label>Title</Form.Label>
               <Form.Control
-                type="text"
+                type="title"
                 value={title}
                 placeholder="Enter the title"
                 onChange={(e) => setTitle(e.target.value)}

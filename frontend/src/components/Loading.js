@@ -1,7 +1,7 @@
 import React from "react";
 import { Spinner } from "react-bootstrap";
 
-const Loading = ({ size = 100 }) => {
+function Loading({ size = 100 }) {
   return (
     <div
       style={{
@@ -21,6 +21,6 @@ const Loading = ({ size = 100 }) => {
       />
     </div>
   );
-};
+}
 
 export default Loading;

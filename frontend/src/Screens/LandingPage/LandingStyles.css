@@ -1,3 +1,14 @@
+.title {
+  font-size: 95px;
+}
+.subtitle {
+  font-size: 25px;
+  padding-top: 10px;
+}
+.intro-text {
+  width: 100%;
+  text-align: center;
+}
 .main {
   min-height: 93vh;
   display: flex;
@@ -6,28 +17,13 @@
   background-position: center;
   background-size: cover;
 }
-
-.title {
-  font-size: 95px;
-}
-
-.subtitle {
-  font-size: 25px;
-  padding-top: 10px;
-}
-
-.intro-text {
-  width: 100%;
-  text-align: center;
-}
-
 .buttonContainer {
   margin-top: 50px;
   display: flex;
   justify-content: space-evenly;
 }
 
-.landingButton {
+.landingbutton {
   width: 200px;
   height: 55px;
 }
@@ -36,7 +32,6 @@
   .buttonContainer {
     padding: 0 200px;
   }
-
   .title {
     padding: 0 100px;
   }
@@ -46,7 +41,7 @@
   .title {
     font-size: 60px;
   }
-  .landingButton {
+  .landingbutton {
     width: 150px;
     height: 50px;
   }

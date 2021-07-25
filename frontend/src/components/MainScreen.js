@@ -1,10 +1,10 @@
 import React from "react";
 import { Container, Row } from "react-bootstrap";
-import './MainScreen.css';
+import "./Screen.css";
 
-const MainScreen = ({title, children}) => {
+function MainScreen({ children, title }) {
   return (
-    <div className="mainBack">
+    <div className="mainback">
       <Container>
         <Row>
           <div className="page">
@@ -20,6 +20,6 @@ const MainScreen = ({title, children}) => {
       </Container>
     </div>
   );
-};
+}
 
 export default MainScreen;

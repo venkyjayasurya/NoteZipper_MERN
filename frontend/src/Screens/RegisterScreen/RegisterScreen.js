@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import Loading from "../components/Loading";
-import ErrorMessage from "../components/ErrorMessage";
-import { register } from "../actions/userActions";
-import MainScreen from "../components/MainScreen";
+import Loading from "../../components/Loading";
+import ErrorMessage from "../../components/ErrorMessage";
+import { register } from "../../actions/userActions";
+import MainScreen from "../../components/MainScreen";
+import "./RegisterScreen.css";
 
 function RegisterScreen({ history }) {
   const [email, setEmail] = useState("");
@@ -35,8 +36,8 @@ function RegisterScreen({ history }) {
       const data = new FormData();
       data.append("file", pics);
       data.append("upload_preset", "notezipper");
-      data.append("cloud_name", "dup5iwodq");
-      fetch("https://api.cloudinary.com/v1_1/dup5iwodq/image/upload", {
+      data.append("cloud_name", "piyushproj");
+      fetch("https://api.cloudinary.com/v1_1/piyushproj/image/upload", {
         method: "post",
         body: data,
       })
@@ -54,7 +55,7 @@ function RegisterScreen({ history }) {
 
   useEffect(() => {
     if (userInfo) {
-      history.push("/mynotes");
+      history.push("/");
     }
   }, [history, userInfo]);
 
