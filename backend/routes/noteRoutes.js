@@ -1,13 +1,13 @@
-import express from "express";
-import {
+const express = require("express");
+const {
   getNoteById,
   getNotes,
   CreateNote,
   DeleteNote,
   UpdateNote,
-} from "../controllers/noteController.js";
+} = require("../controllers/noteController.js");
 const router = express.Router();
-import { protect } from "../middleware/authMiddleware.js";
+const { protect } = require("../middleware/authMiddleware.js");
 
 router.route("/").get(protect, getNotes);
 router
@@ -17,4 +17,4 @@ router
   .put(protect, UpdateNote);
 router.route("/create").post(protect, CreateNote);
 
-export default router;
+module.exports = router;

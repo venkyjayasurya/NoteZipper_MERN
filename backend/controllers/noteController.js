@@ -1,5 +1,5 @@
-import Note from "../models/noteModel.js";
-import asyncHandler from "express-async-handler";
+const Note = require("../models/noteModel.js");
+const asyncHandler = require("express-async-handler");
 
 // @desc    Get logged in user notes
 // @route   GET /api/notes
@@ -89,4 +89,4 @@ const UpdateNote = asyncHandler(async (req, res) => {
   }
 });
 
-export { getNoteById, getNotes, CreateNote, DeleteNote, UpdateNote };
+module.exports = { getNoteById, getNotes, CreateNote, DeleteNote, UpdateNote };
